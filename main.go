@@ -1,9 +1,5 @@
 package main
 
-import (
-	"fmt"
-)
-
 type Action interface {
 	checkWebsite()
 	reportShortDown()
@@ -21,13 +17,18 @@ type Website struct {
 
 func main() {
 	websites := getWebsites()
+	channel := make(chan bool)
+	length := 0
 	for index, v := range websites {
-		if !v.checkWebsite() {
-			fmt.Println(v.name + " is down.")
-		}
-		setNewTime(&websites[index])
+		println(index)
+		go v.checkWebsite(channel)
+		length++
 	}
-	// fmt.Println(websites)
+
+	for {
+		x := <-channel
+		println(x)
+	}
 }
 
 func setNewTime(w *Website) {
