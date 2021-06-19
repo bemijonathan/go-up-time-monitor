@@ -6,5 +6,3 @@ Add a list of websites and check their availability in time intervals
 - every 2 mins make a request to the host
 - report the hosts on downtime 
 - set the new time on the next request
-
-(Todo handle parallell requests)
